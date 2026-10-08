@@ -16,11 +16,13 @@ a{color:inherit;text-decoration:none}
 em{color:var(--gold)}
 /* HERO */
 .hero{min-height:88vh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;
-background:linear-gradient(180deg,#0D101266 0%,#0D1012AA 45%,#0D1012 92%),
-url('https://static.higgsfield.ai/og/v4/project/64e1afb3-7b75-4273-a784-e7c8d24ebb8e-qrpd2c.jpg');
-background-size:cover;background-position:center;opacity:1;filter:saturate(1.05)}
-.hero .wrap{backdrop-filter:blur(1px)}
+/* fused poster wall — all eight films crossfade into each other */
+.hero-wall{position:absolute;inset:0;overflow:hidden}
+.hero-wall::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#0D101255 0%,#0D1012AA 48%,#0D1012 94%)}
+.hero-wall img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+transition:opacity 2.2s ease-in-out;filter:saturate(1.06)}
+.hero-wall img.show{opacity:1}
+.hero .wrap{position:relative;backdrop-filter:blur(1px)}
 .hero .wrap{position:relative;padding:80px 0}
 .eyebrow{font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:26px}
 .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(46px,8vw,110px);line-height:1.02;letter-spacing:-2px}
@@ -82,6 +84,16 @@ footer b{color:var(--dim)}
 <body>
 
 <section class="hero">
+  <div class="hero-wall" id="herowall">
+    <img src="https://static.higgsfield.ai/og/v4/project/1cc33c90-abf8-42bd-b8bc-6e4eca9dc577-2fgmq4.jpg" alt="Film poster" class="show" loading="lazy">
+    <img src="https://static.higgsfield.ai/og/v4/project/a5d4b8f2-f7c8-4e30-bfe8-9fcfad97efb1-372gx1.jpg" alt="Film poster"  loading="lazy">
+    <img src="https://static.higgsfield.ai/og/v4/project/739bda00-2e61-4a13-ba2b-c3b8cf403065-1gimx8d.jpg" alt="Film poster"  loading="lazy">
+    <img src="https://static.higgsfield.ai/og/v4/project/f44ff132-4f90-4437-b4ef-7092126c5ff9-mq01vm.jpg" alt="Film poster"  loading="lazy">
+    <img src="https://static.higgsfield.ai/og/v4/project/5a0b29a7-3941-49b2-83df-3e691820b532-3e67ly.jpg" alt="Film poster"  loading="lazy">
+    <img src="https://static.higgsfield.ai/og/v4/project/a7bc6fcd-51d0-43ae-a838-5468b5f47a06-1bfgj6k.jpg" alt="Film poster"  loading="lazy">
+    <img src="https://static.higgsfield.ai/og/v4/project/0f8d3af0-36ec-4b8b-a27c-11347fa61b13-1rw5zbq.jpg" alt="Film poster"  loading="lazy">
+    <img src="https://static.higgsfield.ai/og/v4/project/64e1afb3-7b75-4273-a784-e7c8d24ebb8e-qrpd2c.jpg" alt="Film poster"  loading="lazy">
+  </div>
   <div class="wrap">
     <p class="eyebrow">AIC Mastermind × Higgsfield · 2026 Contest</p>
     <h1>Seven teams.<br>One reel of light.<br><em>The Gallery.</em></h1>
@@ -218,5 +230,12 @@ footer b{color:var(--dim)}
   AIC Mastermind · Higgsfield 2026 contest gallery · assembled 2026-10-08<br>
   Every poster and link belongs to its own team · built with ❤ by <b>Prithu Goel</b> · powered by GoelStudio
 </footer>
+<script>
+(function(){
+  const imgs=document.querySelectorAll('#herowall img');let i=0;
+  if(!imgs.length)return;
+  setInterval(()=>{imgs[i].classList.remove('show');i=(i+1)%imgs.length;imgs[i].classList.add('show');},4200);
+})();
+</script>
 </body>
 </html>
