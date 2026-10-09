@@ -253,7 +253,19 @@ footer b{color:var(--dim)}
 <footer>
   AIC Mastermind · Higgsfield 2026 contest gallery · assembled 2026-10-08<br>
   Every poster and link belongs to its own team · built with ❤ by <b>Prithu Goel</b> · powered by GoelStudio
+  <p id="viewcount" style="margin-top:10px;font-size:11px;color:#7B847C">···</p>
 </footer>
+<script>
+(function(){
+  // live visit counter (atomic increment on a private edge database)
+  fetch('https://xwyvfnxwoqnukvjvqqdz.supabase.co/rest/v1/rpc/bump_aicf_views',{
+    method:'POST',
+    headers:{'apikey':'sb_publishable_tNzmCtbT5WJBkmG8eRs2lw_TQGGUlw0','Authorization':'Bearer sb_publishable_tNzmCtbT5WJBkmG8eRs2lw_TQGGUlw0','Content-Type':'application/json'},
+    body:JSON.stringify({p_path:'home'})})
+    .then(r=>r.text())
+    .then(n=>{const v=parseInt(n,10);if(!isNaN(v)){document.getElementById('viewcount').textContent='👁 '+v.toLocaleString()+' visits since launch';}});
+})();
+</script>
 <script>
 (function(){
   const imgs=document.querySelectorAll('#herowall img');let i=0;
